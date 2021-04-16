@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<h1 align="center" style="font-family: 仿宋">{{ request.session.s.stuName }} <a href="{% url 'line_chart' %}" style="text-decoration: none;color: #ff0000; font-family: 仿宋">成绩分析</a></h1>
+<p><a href="{% url 'download' %}">下载</a></p>
+<table class="table table-striped">
+    <tr>
+        <td>学期</td>
+        <td>python</td>
+        <td>html</td>
+        <td>jquery</td>
+        <td>英语</td>
+        <td>数学</td>
+        <td>语文</td>
+        <td>css</td>
+        <td>c++</td>
+        <td>毛概</td>
+    </tr>
+
+        {% for i in clist %}
+        <tr>
+            <td>第{{ forloop.counter }}学期</td>
+            {% for j in i %}
+                <td>{{ j }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+
+</table>
+<h1 style="color: red; font-family: 仿宋" align="center">未及格科目及成绩</h1>
+<table style="width: 40%;text-align: center" align="center" class="table table-bordered table-striped">
+    <tr>
+        <td>科目</td>
+        <td>成绩</td>
+        <td>学期</td>
+    </tr>
+    {% for w in wag.values %}
+        {% for a in w %}
+        <tr>
+            <td>{{ a.kid.kname }}</td>
+            <td>{{ a.cj }}</td>
+            <td>{{ a.tid.tname }}</td>
+        </tr>
+        {% endfor %}
+
+    {% endfor %}
+
+</table>
+</body>
+</html>
